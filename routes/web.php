@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmployeController;
+use App\Http\Controllers\CongeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+Route::get('employes', [EmployeController::class, 'index'])->name('employes.index');
+Route::post('employes', [EmployeController::class, 'store'])->name('employes.store');
+
+
+Route::get('conges', [CongeController::class, 'index'])->name('conges.index');
