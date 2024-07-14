@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Employe extends Model
+class Role extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_employe';
+    protected $primaryKey = 'id_role';
 
     protected $fillable = [
-        'prenom', 'nom', 'email', 'date_embauche', 'id_departement', 'id_role', 'jours_conge_restants'
+        'nom',
     ];
 }
