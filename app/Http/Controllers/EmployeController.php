@@ -60,4 +60,9 @@ class EmployeController extends Controller
     }
 
     // Supprimer une employé
+    public function destroy($id)
+    {
+        Employe::destroy($id);
+        return response()->json(null, 204);
+    }
 }
