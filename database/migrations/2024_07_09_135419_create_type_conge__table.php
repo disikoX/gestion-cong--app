@@ -14,7 +14,6 @@ return new class extends Migration
 
         if(!Schema::hasTable('types_conges')) {
 
-            
         Schema::create('types_conges', function (Blueprint $table) {
             $table->id('id_type_conge');
             $table->string('nom_type_conge', 100);
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('type_conge_');
+        Schema::dropIfExists('types_conges_');
     }
 };

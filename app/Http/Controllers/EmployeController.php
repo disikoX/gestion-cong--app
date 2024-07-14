@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employe;
-
-
-
+use App\Models\Departement;
+use App\Models\Role;
 
 
 class EmployeController extends Controller
@@ -57,6 +56,6 @@ class EmployeController extends Controller
         ]);
 
         $employe = Employe::create($request->all());
-        return response()->json($employe, 200);
+        return response()->json($employe, 201);
     }
 }
