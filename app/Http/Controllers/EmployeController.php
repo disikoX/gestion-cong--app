@@ -58,4 +58,6 @@ class EmployeController extends Controller
         $employe = Employe::create($request->all());
         return response()->json($employe, 201);
     }
+
+    // Supprimer une employé
 }
