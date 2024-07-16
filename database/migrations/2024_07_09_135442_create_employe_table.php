@@ -21,7 +21,6 @@ return new class extends Migration
             $table->unsignedBigInteger('id_departement');
             $table->unsignedBigInteger('id_role');
             $table->integer('jours_conge_restants');
-            $table->timestamps();
 
             $table->foreign('id_departement')->references('id_departement')->on('departements')->onDelete('cascade');
             $table->foreign('id_role')->references('id_role')->on('roles')->onDelete('cascade');

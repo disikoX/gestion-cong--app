@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id('id_type_conge');
             $table->string('nom_type_conge', 100);
             $table->integer('jours_alloues');
-            $table->timestamps();
+            
         });
 
         }

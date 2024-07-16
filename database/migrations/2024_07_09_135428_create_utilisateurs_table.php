@@ -20,7 +20,6 @@ return new class extends Migration
                 $table->string('nom', 50);
                 $table->string('prenom', 50);
                 $table->string('mot_de_passe');
-                $table->timestamps();
             });
         }
 

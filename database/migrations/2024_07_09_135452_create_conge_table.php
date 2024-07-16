@@ -22,7 +22,6 @@ return new class extends Migration
                 $table->string('statut', 50);
                 $table->date('date_demande');
                 $table->date('date_approbation')->nullable();
-                $table->timestamps();
     
                 $table->foreign('id_employe')->references('id_employe')->on('employes')->onDelete('cascade');
                 $table->foreign('id_type_conge')->references('id_type_conge')->on('types_conges')->onDelete('cascade');

@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeController;
 use App\Http\Controllers\CongeController;
+use App\Http\Controllers\AuthController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,3 +36,10 @@ Route::get('/conges/{id}', [CongeController::class, 'show'])->name('conges.show'
 Route::post('/conges', [CongeController::class, 'store'])->name('conges.store');
 Route::put('/conges/{id}', [CongeController::class, 'update'])->name('conges.update');
 Route::delete('/conges/{id}', [CongeController::class, 'destroy'])->name('conges.destroy');
+
+
+
+Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout'])->middleware('jwt.auth');
+Route::post('refresh', [AuthController::class, 'refresh'])->middleware('jwt.refresh');
+Route::get('user', [AuthController::class, 'user'])->middleware('jwt.auth');
