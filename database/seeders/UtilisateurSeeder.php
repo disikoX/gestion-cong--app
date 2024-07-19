@@ -3,14 +3,14 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Utilisateur;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class UtilisateurSeeder extends Seeder
 {
     public function run()
     {
-        Utilisateur::create([
+        User::create([
             'prenom' => 'puta',
             'nom' => 'shit',
             'mot_de_passe' => Hash::make('12'), // Hachez le mot de passe

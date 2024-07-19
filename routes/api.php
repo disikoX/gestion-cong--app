@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Routes pour les employés
+/** Routes pour les employés */
 Route::get('/employes', [EmployeController::class, 'index'])->name('employes.index');
 Route::get('/employes/{id}', [EmployeController::class, 'show'])->name('employes.show');
 Route::post('/employes', [EmployeController::class, 'store'])->name('employes.store');
@@ -30,7 +30,7 @@ Route::delete('/employes/{id}', [EmployeController::class, 'destroy'])->name('em
 Route::get('/employes/create', [EmployeController::class, 'create'])->name('employes.create');
 
 
-// Routes pour les congés
+/** Routes pour les congés */
 Route::get('/conges', [CongeController::class, 'index'])->name('conges.index');
 Route::get('/conges/{id}', [CongeController::class, 'show'])->name('conges.show');
 Route::post('/conges', [CongeController::class, 'store'])->name('conges.store');
@@ -38,7 +38,7 @@ Route::put('/conges/{id}', [CongeController::class, 'update'])->name('conges.upd
 Route::delete('/conges/{id}', [CongeController::class, 'destroy'])->name('conges.destroy');
 
 
-
+/** Routes pour l'authentification */
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware('jwt.auth');
 Route::post('refresh', [AuthController::class, 'refresh'])->middleware('jwt.refresh');
