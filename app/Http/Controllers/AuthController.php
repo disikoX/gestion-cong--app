@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Utilisateur;
+// use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
+
 class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $credentials = $request->only('nom','prenom','mot_de_passe', 'code_employe');
+        $credentials = $request->only('nom', 'prenom', 'password', 'code_employe');
 
         // Vérifier les informations d'identification
         if (!$token = JWTAuth::attempt($credentials)) {
