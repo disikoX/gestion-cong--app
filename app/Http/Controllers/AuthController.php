@@ -16,10 +16,11 @@ class AuthController extends Controller
 
         // Vérifier les informations d'identification
         if (!$token = JWTAuth::attempt($credentials)) {
-            return response()->json(['error' => 'Invalid credentials'], 401);
-        }
+             return response()->json(['error' => 'Invalid credentials'], 401);
+         }
 
         return response()->json(compact('token'));
+        // return $credentials;
     }
 
     public function logout()

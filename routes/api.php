@@ -17,29 +17,54 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::middleware('auth:api')->group(function () {
+    /** Routes pour les employés */
+    Route::controller(EmployeController::class)->group(function() {
+        Route::get('/employes', 'index')->name('employes.index');
+        Route::get('/employes/{id}', 'show')->name('employes.show');
+        Route::post('/employes', 'store')->name('employes.store');
+        Route::put('/employes/{id}', 'update')->name('employes.update');
+        Route::delete('/employes/{id}', 'destroy')->name('employes.destroy');
+        Route::get('/employes/create', 'create')->name('employes.create');
+    });
+    
+    
+    /** Routes pour les congés */
+    Route::controller(CongeController::class)->group(function() {
+        Route::get('/conges', 'index')->name('conges.index');
+        Route::get('/conges/{id}', 'show')->name('conges.show');
+        Route::post('/conges', 'store')->name('conges.store');
+        Route::put('/conges/{id}', 'update')->name('conges.update');
+        Route::delete('/conges/{id}', 'destroy')->name('conges.destroy');
+    });
+
+    
+    
 });
 
-/** Routes pour les employés */
-Route::get('/employes', [EmployeController::class, 'index'])->name('employes.index');
-Route::get('/employes/{id}', [EmployeController::class, 'show'])->name('employes.show');
-Route::post('/employes', [EmployeController::class, 'store'])->name('employes.store');
-Route::put('/employes/{id}', [EmployeController::class, 'update'])->name('employes.update');
-Route::delete('/employes/{id}', [EmployeController::class, 'destroy'])->name('employes.destroy');
-Route::get('/employes/create', [EmployeController::class, 'create'])->name('employes.create');
+/** Les routes pour l'authentification
+ * -------------------------------------
+ * Regroupées dans un middleware "api"
+ * Et tous sont prefixés de "auth" (localhost:8000/api/auth/...)
+ */
+Route::group([
 
+    'middleware' => 'api',
+    'prefix' => 'auth'
 
-/** Routes pour les congés */
-Route::get('/conges', [CongeController::class, 'index'])->name('conges.index');
-Route::get('/conges/{id}', [CongeController::class, 'show'])->name('conges.show');
-Route::post('/conges', [CongeController::class, 'store'])->name('conges.store');
-Route::put('/conges/{id}', [CongeController::class, 'update'])->name('conges.update');
-Route::delete('/conges/{id}', [CongeController::class, 'destroy'])->name('conges.destroy');
+], function ($router) {
+    /** Routes pour l'authentification */
+    Route::controller(AuthController::class)->group(function() {
+        Route::post('logout', 'logout');
+        Route::post('refresh', 'refresh');
+        Route::get('user', 'user');
+    });
 
-
-/** Routes pour l'authentification */
-Route::post('login', [AuthController::class, 'login']);
-Route::post('logout', [AuthController::class, 'logout'])->middleware('jwt.auth');
-Route::post('refresh', [AuthController::class, 'refresh'])->middleware('jwt.refresh');
-Route::get('user', [AuthController::class, 'user'])->middleware('jwt.auth');
+    Route::controller(AuthController::class)->group(function() {
+            Route::post('login', 'login');
+    });
+});
