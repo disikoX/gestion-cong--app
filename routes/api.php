@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeController;
 use App\Http\Controllers\CongeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TypeCongeController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\DepartementController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +44,33 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/conges', 'store')->name('conges.store');
         Route::put('/conges/{id}', 'update')->name('conges.update');
         Route::delete('/conges/{id}', 'destroy')->name('conges.destroy');
+    });
+
+    /** Routes pour les departements */
+    Route::controller(DepartementController::class)->group(function() {
+        Route::get('/departements', 'index')->name('departements.index');
+        Route::get('/departements/{id}', 'show')->name('departements.show');
+        Route::post('/departements', 'store')->name('departements.store');
+        Route::put('/departements/{id}', 'update')->name('departements.update');
+        Route::delete('/departements/{id}', 'destroy')->name('departements.destroy');
+    });
+
+    /** Routes pour les roles */
+    Route::controller(RoleController::class)->group(function() {
+        Route::get('/roles', 'index')->name('roles.index');
+        Route::get('/roles/{id}', 'show')->name('roles.show');
+        Route::post('/roles', 'store')->name('roles.store');
+        Route::put('/roles/{id}', 'update')->name('roles.update');
+        Route::delete('/roles/{id}', 'destroy')->name('roles.destroy');
+    });
+
+    /** Routes pour les types de congés */
+    Route::controller(TypeCongeController::class)->group(function() {
+        Route::get('/types', 'index')->name('types.index');
+        Route::get('/types/{id}', 'show')->name('types.show');
+        Route::post('/types', 'store')->name('types.store');
+        Route::put('/types/{id}', 'update')->name('types.update');
+        Route::delete('/types/{id}', 'destroy')->name('types.destroy');
     });
 
     
