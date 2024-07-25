@@ -11,7 +11,13 @@ class CongeController extends Controller
     // Afficher tous les congés
     public function index()
     {
-        $conges = Conge::with(['employe'])->get();
+        // $conges = Conge::with(['employe'])->get();
+        $conges = Conge::join('employes', 'employes.id_employe', '=', 'conges.id_employe')
+        ->join('roles', 'employes.id_role', '=', 'roles.id_role')
+        ->join('departements', 'employes.id_departement', '=', 'departements.id_departement')
+        ->select('conges.*', 'employes.nom', 'employes.prenom', 'employes.jours_conge_restants', 'roles.id_role', 'roles.nom_role', 'departements.id_departement', 'departements.nom_departement')
+        ->get();
+
         return response()->json($conges);
     }
 
