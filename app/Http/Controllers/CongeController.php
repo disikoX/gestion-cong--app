@@ -13,9 +13,10 @@ class CongeController extends Controller
     {
         // $conges = Conge::with(['employe'])->get();
         $conges = Conge::join('employes', 'employes.id_employe', '=', 'conges.id_employe')
+        ->join('types_conges', 'types_conges.id_type_conge', '=', 'conges.id_type_conge')
         ->join('roles', 'employes.id_role', '=', 'roles.id_role')
         ->join('departements', 'employes.id_departement', '=', 'departements.id_departement')
-        ->select('conges.*', 'employes.nom', 'employes.prenom', 'employes.jours_conge_restants', 'roles.id_role', 'roles.nom_role', 'departements.id_departement', 'departements.nom_departement')
+        ->select('conges.*', 'types_conges.nom_type_conge', 'employes.nom', 'employes.prenom', 'employes.jours_conge_restants', 'roles.id_role', 'roles.nom_role', 'departements.id_departement', 'departements.nom_departement')
         ->get();
 
         return response()->json($conges);
